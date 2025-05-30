@@ -48,6 +48,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+
         // Check if the authenticated user is the same as the post user
         if (auth()->id() !== $post->user_id) {
             abort(403, 'Unauthorized action.');
@@ -74,6 +75,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+
         // Check if the authenticated user is the same as the post user
         if (auth()->id() !== $post->user_id) {
             abort(403, 'Unauthorized action.');
@@ -83,8 +85,11 @@ class PostController extends Controller
         Storage::disk('public')->delete($post->image_path);
         
         // Delete the post
+
         $post->delete();
 
         return redirect('/profile/' . auth()->user()->id);
     }
+
 }
+
