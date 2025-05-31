@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         if (auth()->id() !== $user->id) {
-            abot(403, 'Unauthorized Action');
+            abort(403, 'Unauthorized Action');
         }
 
         return view('profiles.edit', compact('user'));
@@ -40,7 +40,7 @@ class ProfileController extends Controller
             if ($user->profile_image) {
                 Storage::disk('public')->delete($user->profile_image);
             }
-            
+
             $imagePath = $request->file('profile_image')->store('profile', 'public');
             $data['profile_image'] = $imagePath;
         }
