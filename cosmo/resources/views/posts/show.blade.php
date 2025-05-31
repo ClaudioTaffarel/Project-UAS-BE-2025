@@ -13,7 +13,6 @@
                     <a href="{{ route('profile.show', $post->user->id) }}" class="text-light text-decoration-none">
                         <strong>{{ $post->user->username }}</strong>
                     </a>
-
                     @if(auth()->id() === $post->user_id)
                         <div class="dropdown ms-auto">
                             <button class="btn btn-link text-dark" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,9 +55,11 @@
                         </button>
                     </form>
                 @else
+
                     <form action="{{ route('likes.store', $post->id) }}" method="POST" class="me-2">
                         @csrf
                         <button type="submit" class="btn btn-link p-0">
+
                             <i class="far fa-heart"></i>
                         </button>
                     </form>
@@ -70,11 +71,11 @@
             <p class="text-white">{{ $post->created_at->format('F d, Y') }}</p>
 
             <hr>
-
             <div class="comments-section" style="max-height: 300px; overflow-y: auto;">
                 @foreach($post->comments as $comment)
                     <div class="d-flex mb-2">
                         @if($comment->user)
+
                             <strong class="me-2 text-white">{{ $comment->user->username }}</strong>
                         @else
                             <strong class="me-2 text-white">Deleted User</strong>
@@ -107,3 +108,4 @@
     </div>
 </div>
 @endsection
+
