@@ -56,7 +56,6 @@
             height: auto;
             pointer-events: none; /* supaya nggak ganggu klik */
         }
-        
     </style>
 </head>
 <body>

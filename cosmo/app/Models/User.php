@@ -79,4 +79,12 @@ class User extends Authenticatable
     {
         return $this->following()->where('following_id', $userId)->exists();
     }
+
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->profile_image
+            ? asset('storage/' . $this->profile_image)
+            : asset('user-placeholder.png');
+    }
+
 }
