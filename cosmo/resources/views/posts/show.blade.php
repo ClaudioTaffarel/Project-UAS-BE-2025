@@ -15,7 +15,7 @@
                     </a>
                     @if(auth()->id() === $post->user_id)
                         <div class="dropdown ms-auto">
-                            <button class="btn btn-link text-dark" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-link text-light" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="postOptions">
@@ -67,7 +67,7 @@
 
                 <span class="text-white"><strong>{{ $post->likes->count() }} likes</strong></span>
             </div>
-            
+
             <p class="text-white">{{ $post->created_at->format('F d, Y') }}</p>
 
             <hr>

@@ -13,7 +13,7 @@
 <body>
     <div id="app" class="d-flex">
         <!-- Sidebar -->
-        <div class="sidebar bg-dark text-white d-flex flex-column justify-content-between p-4 position-fixed" style="width: 260px; height: 100vh;">
+        <div class="sidebar bg-dark d-flex flex-column justify-content-between p-4 position-fixed" style="width: 260px; height: 100vh;">
             <div>
                 <div class="mb-4">
                     <img src="{{ asset('cosmoFull-logo2.png') }}" alt="Cosmo Logo" class="logo-img">
@@ -21,18 +21,18 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item mb-3">
-                        <a class="nav-link text-white fs-5" href="{{ route('posts.index') }}">
+                        <a class="nav-link fs-5" href="{{ route('posts.index') }}">
                             <i class="fa fa-home me-2"></i> Feed
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a class="nav-link text-white fs-5" href="{{ route('posts.create') }}">
+                        <a class="nav-link fs-5" href="{{ route('posts.create') }}">
                             <i class="fa fa-plus-square me-2"></i> New Post
                         </a>
                     </li>
                     <li class="nav-item mb-3">
                         @auth
-                            <a class="nav-link text-white fs-5" href="{{ route('profile.show', Auth::user()->id) }}">
+                            <a class="nav-link fs-5" href="{{ route('profile.show', Auth::user()->id) }}">
                                 <i class="fa fa-user me-2"></i> Profile
                             </a>
                         @endauth
@@ -42,7 +42,7 @@
 
             <!-- Logout di paling bawah -->
             <div>
-                <a class="nav-link text-white fs-5" href="{{ route('logout') }}"
+                <a class="nav-link fs-5" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-sign-out-alt me-2"></i> Logout
                 </a>

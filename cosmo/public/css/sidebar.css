@@ -7,13 +7,16 @@ body {
 }
 
 .sidebar a.nav-link {
+    color: white;
     padding: 10px 15px;
     border-radius: 10px;
     transition: background-color 0.2s;
 }
 
 .sidebar a.nav-link:hover {
-    background-color: #343a40;
+    background-color: transparent; /* hilangkan latar belakang */
+    color: #ffeb80; /* kuning muda */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* efek glow/shadow gelap */
     text-decoration: none;
 }
 
@@ -37,11 +40,6 @@ body {
     background-size: cover; /* atau 'contain' kalau mau gambar utuh */
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.sidebar a.nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* 0.5 = 50% opacity */
-    text-decoration: none;
 }
 
 .logo-img {
