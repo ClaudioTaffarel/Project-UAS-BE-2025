@@ -12,6 +12,10 @@ body {
     transition: background-color 0.2s;
 }
 
+.sidebar a.nav-link:hover {
+    background-color: #343a40;
+    text-decoration: none;
+  
 .sidebar img {
     display: block;
     margin-left: auto;
@@ -28,7 +32,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     background-image: url('/space0.png');
     background-size: cover; /* atau 'contain' kalau mau gambar utuh */
     background-repeat: no-repeat;
