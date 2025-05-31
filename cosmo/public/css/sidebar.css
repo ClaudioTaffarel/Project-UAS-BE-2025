@@ -15,7 +15,8 @@ body {
 .sidebar a.nav-link:hover {
     background-color: #343a40;
     text-decoration: none;
-  
+}
+
 .sidebar img {
     display: block;
     margin-left: auto;
