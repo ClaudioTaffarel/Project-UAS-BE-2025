@@ -1,0 +1,35 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+}
+
+.sidebar a.nav-link {
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.sidebar a.nav-link:hover {
+    background-color: #343a40;
+    text-decoration: none;
+}
+
+.sidebar img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1f1f1f;
+    padding: 20px 10px; /* jangan kasih terlalu besar padding-left */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

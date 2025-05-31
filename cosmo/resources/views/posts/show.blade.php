@@ -10,10 +10,10 @@
             <div class="d-flex align-items-center mb-3">
                 @if($post->user)
                     <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : 'https://via.placeholder.com/40' }}" class="rounded-circle me-3" style="width: 40px; height: 40px;">
-                    <a href="{{ route('profile.show', $post->user->id) }}" class="text-dark text-decoration-none">
+                    <a href="{{ route('profile.show', $post->user->id) }}" class="text-light text-decoration-none">
                         <strong>{{ $post->user->username }}</strong>
                     </a>
-                    
+
                     @if(auth()->id() === $post->user_id)
                         <div class="dropdown ms-auto">
                             <button class="btn btn-link text-dark" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,47 +38,49 @@
                     <span class="text-muted">Deleted User</span>
                 @endif
             </div>
-            
+
             @if($post->user)
                 <p><strong>{{ $post->user->username }}</strong> {{ $post->caption }}</p>
             @else
                 <p>{{ $post->caption }}</p>
             @endif
             <hr>
-            
-            <div class="d-flex mb-2">
+
+            <div class="d-flex align-items-center mb-2">
                 @if($post->likes->where('user_id', auth()->id())->count() > 0)
-                    <form action="{{ route('likes.destroy', $post->id) }}" method="POST">
+                    <form action="{{ route('likes.destroy', $post->id) }}" method="POST" class="me-2">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-link p-0 me-2">
+                        <button type="submit" class="btn btn-link p-0">
                             <i class="fas fa-heart text-danger"></i>
                         </button>
                     </form>
                 @else
-                    <form action="{{ route('likes.store', $post->id) }}" method="POST">
+                    <form action="{{ route('likes.store', $post->id) }}" method="POST" class="me-2">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 me-2">
+                        <button type="submit" class="btn btn-link p-0">
                             <i class="far fa-heart"></i>
                         </button>
                     </form>
                 @endif
+
+                <span class="text-white"><strong>{{ $post->likes->count() }} likes</strong></span>
             </div>
-            <p><strong>{{ $post->likes->count() }} likes</strong></p>
-            <p class="text-muted">{{ $post->created_at->format('F d, Y') }}</p>
             
+            <p class="text-white">{{ $post->created_at->format('F d, Y') }}</p>
+
             <hr>
-            
+
             <div class="comments-section" style="max-height: 300px; overflow-y: auto;">
                 @foreach($post->comments as $comment)
                     <div class="d-flex mb-2">
                         @if($comment->user)
-                            <strong class="me-2">{{ $comment->user->username }}</strong>
+                            <strong class="me-2 text-white">{{ $comment->user->username }}</strong>
                         @else
-                            <strong class="me-2">Deleted User</strong>
+                            <strong class="me-2 text-white">Deleted User</strong>
                         @endif
                         <p class="mb-0">{{ $comment->comment }}</p>
-                        
+
                         @if(auth()->id() === $comment->user_id || auth()->id() === $post->user_id)
                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="ms-auto">
                                 @csrf
@@ -91,9 +93,9 @@
                     </div>
                 @endforeach
             </div>
-            
+
             <hr>
-            
+
             <form action="{{ route('comments.store', $post->id) }}" method="POST">
                 @csrf
                 <div class="input-group">
