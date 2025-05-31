@@ -45,6 +45,18 @@
             height: 60px;
         }
 
+        .overlay-top-img {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999; /* paling tinggi */
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            pointer-events: none; /* supaya nggak ganggu klik */
+        }
+        
     </style>
 </head>
 <body>
@@ -53,6 +65,9 @@
         <source src="{{ asset('spacevid2.mp4') }}" type="video/mp4">
     </video>
     <div class="overlay"></div>
+
+    <img src="{{ asset('doodles.png') }}" alt="Overlay Top"
+        class="overlay-top-img">
 
     <div id="app">
         {{-- Navbar --}}

@@ -16,7 +16,7 @@
         <div class="sidebar bg-dark text-white d-flex flex-column justify-content-between p-4 position-fixed" style="width: 260px; height: 100vh;">
             <div>
                 <div class="mb-4">
-                    <img src="{{ asset('cosmoFull-logo.png') }}" alt="Cosmo Logo" class="mx-auto d-block" style="max-width: 120px;">
+                    <img src="{{ asset('cosmoFull-logo2.png') }}" alt="Cosmo Logo" class="logo-img">
                 </div>
 
                 <ul class="nav flex-column">

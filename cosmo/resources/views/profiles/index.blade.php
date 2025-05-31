@@ -4,7 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/150' }}" class="rounded-circle w-100" style="max-width: 150px;">
+            <img
+                src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/150' }}"
+                class="rounded-circle"
+                style="width: 150px; height: 150px; object-fit: cover;">
         </div>
         <div class="col-md-9">
             <div class="d-flex align-items-center">
