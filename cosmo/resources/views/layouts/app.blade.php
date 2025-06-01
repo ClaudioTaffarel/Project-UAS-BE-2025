@@ -21,8 +21,13 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item mb-3">
-                        <a class="nav-link fs-5" href="{{ route('posts.index') }}">
-                            <i class="fa fa-home me-2"></i> Feed
+                        <a class="btn btn-outline-light w-100" href="{{ route('posts.index') }}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a class="btn btn-outline-light w-100" href="{{ route('recommendations.index') }}">
+                            Recommendations
                         </a>
                     </li>
                     <li class="nav-item mb-3">
@@ -39,6 +44,7 @@
                     </li>
                 </ul>
             </div>
+        </div>
 
             <!-- Logout di paling bawah -->
             <div>

@@ -7,6 +7,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RecommendationController;
+
 
 Route::get('/', [PostController::class, 'index'])
     ->middleware('auth')
@@ -38,3 +40,6 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
+
+Route::get('/recommendations', [RecommendationController::class, 'index'])
+->name('recommendations.index');
