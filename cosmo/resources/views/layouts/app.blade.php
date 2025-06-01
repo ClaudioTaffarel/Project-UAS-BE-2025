@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
-
 </head>
 <body>
     <div id="app" class="d-flex">
@@ -19,37 +18,36 @@
                     <img src="{{ asset('cosmoFull-logo2.png') }}" alt="Cosmo Logo" class="logo-img">
                 </div>
 
-                <ul class="nav flex-column">
+                <ul class="nav flex-column mt-5">
                     <li class="nav-item mb-3">
-                        <a class="btn btn-outline-light w-100" href="{{ route('posts.index') }}">
-                            Home
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('posts.index') }}">
+                            <i class="fa fa-home me-2"></i> Home
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a class="btn btn-outline-light w-100" href="{{ route('recommendations.index') }}">
-                            Recommendations
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('recommendations.index') }}">
+                            <i class="fa fa-compass me-2"></i> Recommendations
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a class="nav-link fs-5" href="{{ route('posts.create') }}">
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('posts.create') }}">
                             <i class="fa fa-plus-square me-2"></i> New Post
                         </a>
                     </li>
+                    @auth
                     <li class="nav-item mb-3">
-                        @auth
-                            <a class="nav-link fs-5" href="{{ route('profile.show', Auth::user()->id) }}">
-                                <i class="fa fa-user me-2"></i> Profile
-                            </a>
-                        @endauth
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('profile.show', Auth::user()->id) }}">
+                            <i class="fa fa-user me-2"></i> Profile
+                        </a>
                     </li>
+                    @endauth
                 </ul>
             </div>
-        </div>
 
             <!-- Logout di paling bawah -->
             <div>
-                <a class="nav-link fs-5" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-sign-out-alt me-2"></i> Logout
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -57,7 +55,6 @@
                 </form>
             </div>
         </div>
-
 
         <!-- Main Content -->
         <main class="flex-fill p-4" style="margin-left: 260px;">
