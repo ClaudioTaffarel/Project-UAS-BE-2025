@@ -20,7 +20,7 @@
 
                 <ul class="nav flex-column mt-5">
                     <li class="nav-item mb-3">
-                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('posts.index') }}">
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('home.index') }}">
                             <i class="fa fa-home me-2"></i> Home
                         </a>
                     </li>

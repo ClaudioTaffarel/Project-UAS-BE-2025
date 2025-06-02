@@ -8,15 +8,18 @@ use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController; 
 
-
-Route::get('/', [PostController::class, 'index'])
-    ->middleware('auth')
-    ->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])
+    ->middleware('auth')
+    ->name('home.index');
 
 Auth::routes();
 
@@ -43,3 +46,5 @@ Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('u
 
 Route::get('/recommendations', [RecommendationController::class, 'index'])
 ->name('recommendations.index');
+
+Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
