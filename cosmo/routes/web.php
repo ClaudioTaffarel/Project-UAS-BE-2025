@@ -48,3 +48,6 @@ Route::get('/recommendations', [RecommendationController::class, 'index'])
 ->name('recommendations.index');
 
 Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
+Route::get('/search/suggestions', [UserController::class, 'suggest']);
+
+
