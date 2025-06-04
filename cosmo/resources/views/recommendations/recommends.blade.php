@@ -31,7 +31,11 @@
 
         const filtered = users.filter(user => 
             user.username.toLowerCase().includes(query) || user.name.toLowerCase().includes(query)
+<<<<<<< HEAD
         ).slice(0, 5); // Batasi max 5 hasil
+=======
+        ).slice(0, 5);
+>>>>>>> 30f7f02 (Commit 5 Devin : Optimisasi search dan Recommendation page)
 
         if (filtered.length === 0) {
             suggestionsBox.style.display = 'none';
@@ -40,9 +44,19 @@
         }
 
         suggestionsBox.innerHTML = filtered.map(user => `
+<<<<<<< HEAD
             <div class="suggestion-item" style="padding: 8px; cursor: pointer;">
                 <a href="/users/${user.id}" style="text-decoration: none; color: black;">
                     <strong>${user.username}</strong> - ${user.name}
+=======
+            <div class="suggestion-item" style="padding: 8px; cursor: pointer; display: flex; align-items: center;">
+                <img src="${user.profile_image_url}" alt="${user.username}" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+                <a href="/profile/${user.id}" style="text-decoration: none; color: black;">
+                    <div>
+                        <strong>${user.username}</strong><br>
+                        <small>${user.name}</small>
+                    </div>
+>>>>>>> 30f7f02 (Commit 5 Devin : Optimisasi search dan Recommendation page)
                 </a>
             </div>
         `).join('');
@@ -88,17 +102,13 @@
         }
     </style>
 
-    @if($posts->count())
-        <div class="post-grid mb-5">
-            @foreach($posts as $post)
-                @if($post->image_url)
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            @foreach ($posts as $post)
+                <div class="col">
                     <a href="{{ route('posts.show', $post->id) }}">
-                        <img src="{{ $post->image_url }}" alt="Post Image">
+                        <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : 'https://via.placeholder.com/250' }}" alt="Post Image" class="img-fluid rounded" style="width: 100%; height: 250px; object-fit: cover;">
                     </a>
-                @endif
+                </div>
             @endforeach
         </div>
-    @else
-        <p>No recommendations available right now.</p>
-    @endif
 @endsection

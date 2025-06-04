@@ -11,7 +11,7 @@ use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController; 
 
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
 
 Route::get('/home', function () {
     return redirect('/');
@@ -48,6 +48,7 @@ Route::get('/recommendations', [RecommendationController::class, 'index'])
 ->name('recommendations.index');
 
 Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
-Route::get('/search/suggestions', [UserController::class, 'suggest']);
+
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 

@@ -1,32 +1,31 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Post; // Import jika mau pakai postingan
+use App\Models\Post;
 
 class UserController extends Controller
 {
-            public function search(Request $request)
-        {
-            $query = $request->input('query');
+    public function search(Request $request)
+    {
+         $query = $request->input('query');
 
-            // Ambil semua user (untuk ditampilkan di view)
-            $users = User::select('id', 'name', 'username', 'profile_image')->get();
-
-            // Ambil post yang cocok dengan user yang dicari
-            $posts = Post::query();
-
-            if ($query) {
-                $posts = $posts->whereHas('user', function ($q) use ($query) {
+    $users = User::select('id', 'name', 'username', 'profile_image')
+                 ->when($query, function($q) use ($query) {
                     $q->where('username', 'like', "%{$query}%")
-                    ->orWhere('name', 'like', "%{$query}%");
-                });
-            }
+                      ->orWhere('name', 'like', "%{$query}%");
+                 })
+                 ->limit(20)
+                 ->get();
 
-            return view('recommendations.recommends', [
-                'users' => $users,
-                'posts' => $posts->get()
-            ]);
-        }
+    return view('recommendations.recommends', compact('users'));
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }

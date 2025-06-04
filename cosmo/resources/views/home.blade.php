@@ -61,7 +61,6 @@
                     {{ $post->caption }}
                 </p>
 
-                <!-- Likes -->
                 <div class="d-flex align-items-center mt-2">
                     @if($post->likes->where('user_id', auth()->id())->count() > 0)
                         <form action="{{ route('likes.destroy', $post->id) }}" method="POST" class="me-2">
@@ -83,7 +82,6 @@
                     <span><strong>{{ $post->likes->count() }} likes</strong></span>
                 </div>
 
-                <!-- Comments -->
                 <div class="mt-3" style="max-height: 150px; overflow-y: auto;">
                     @foreach($post->comments as $comment)
                         <div class="d-flex mb-1 align-items-center">
@@ -103,7 +101,6 @@
                     @endforeach
                 </div>
 
-                <!-- Comment form -->
                 <form action="{{ route('comments.store', $post->id) }}" method="POST" class="mt-2">
                     @csrf
                     <div class="input-group">

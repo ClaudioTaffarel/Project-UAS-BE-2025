@@ -20,12 +20,14 @@
 
                 <ul class="nav flex-column mt-5">
                     <li class="nav-item mb-3">
-                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('home.index') }}">
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100 d-flex align-items-center"
+                            style = "white-space: nowrap;" href="{{ route('home.index') }}">
                             <i class="fa fa-home me-2"></i> Home
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100" href="{{ route('recommendations.index') }}">
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100 d-flex align-items-center"
+                            style = "white-space: nowrap;" href="{{ route('recommendations.index') }}">
                             <i class="fa fa-compass me-2"></i> Recommendations
                         </a>
                     </li>

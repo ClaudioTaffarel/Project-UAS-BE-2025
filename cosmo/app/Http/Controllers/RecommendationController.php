@@ -15,17 +15,14 @@ class RecommendationController extends Controller
 
         $followingIds = $user->following()->pluck('users.id');
 
-        $posts = Post::whereNotIn('user_id', $followingIds)
-                     ->with('user')
-                     ->inRandomOrder()
-                     ->take(20)
-                     ->get();
-
-        // ⬇️ Tambahkan ini untuk ambil data user suggestion
+            $posts = Post::where('user_id', '!=', $user->id)
+                 ->with('user')
+                 ->inRandomOrder()
+                 ->take(20)
+                 ->get();
+        
         $users = User::select('id', 'username', 'name')->limit(500)->get();
 
-        // ⬇️ Pastikan kedua variabel ini sudah ada sebelum compact
         return view('recommendations.recommends', compact('posts', 'users'));
     }
 }
-
