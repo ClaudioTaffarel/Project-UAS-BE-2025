@@ -101,12 +101,15 @@
             transform: scale(1.03);
         }
     </style>
-
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             @foreach ($posts as $post)
                 <div class="col">
                     <a href="{{ route('posts.show', $post->id) }}">
-                        <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : 'https://via.placeholder.com/250' }}" alt="Post Image" class="img-fluid rounded" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div style="width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 10px;">
+                            <img src="{{ $post->image_path ? asset('storage/' . $post->image_path) : 'https://via.placeholder.com/250' }}"
+                                alt="Post Image"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                     </a>
                 </div>
             @endforeach
