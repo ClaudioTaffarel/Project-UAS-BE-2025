@@ -8,6 +8,9 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Auth\ManualResetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PasswordResetController;
+
+Route::get('/manual-reset', [PasswordResetController::class, 'showResetForm'])->name('manual.reset.form');
 
 Route::get('/', [PostController::class, 'index'])
     ->middleware('auth')
