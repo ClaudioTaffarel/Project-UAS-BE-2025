@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <img src="{{ asset('storage/' . $post->image_path) }}" class="w-100">
+        @foreach($post->user->posts as $userPost)
+            <img src="{{ asset('storage/' . $userPost->image_path) }}" alt="Post Image">
+        @endforeach
         </div>
         <div class="col-md-4">
             <div class="d-flex align-items-center mb-3">

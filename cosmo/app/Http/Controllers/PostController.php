@@ -41,8 +41,9 @@ class PostController extends Controller
         return redirect('/profile/' . auth()->user()->id);
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::with(['user', 'likes', 'comments.user'])->findOrFail($id);
         return view('posts.show', compact('post'));
     }
 
