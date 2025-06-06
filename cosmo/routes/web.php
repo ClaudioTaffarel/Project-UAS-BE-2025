@@ -1,3 +1,4 @@
+web.php
 <?php
 
 use App\Http\Controllers\PostController;
@@ -40,3 +41,5 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
+Route::get('/manual-reset', [ManualResetController::class, 'showForm'])->name('manual.reset.form');
+Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('manual.reset.process');
