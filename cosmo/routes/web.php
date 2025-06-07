@@ -1,3 +1,4 @@
+web.php
 <?php
 
 use App\Http\Controllers\PostController;
@@ -5,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\Auth\ManualResetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecommendationController;
@@ -42,9 +44,7 @@ Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow'
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
-
 Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
 
-
-
-
+Route::get('/manual-reset', [ManualResetController::class, 'showForm'])->name('manual.reset.form');
+Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('manual.reset.process');
