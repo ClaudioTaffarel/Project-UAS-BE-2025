@@ -8,13 +8,15 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Auth\ManualResetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PasswordResetController;
 
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
 Route::get('/manual-reset', [PasswordResetController::class, 'showResetForm'])->name('manual.reset.form');
 
-Route::get('/', [PostController::class, 'index'])
-    ->middleware('auth')
-    ->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
 
 Route::get('/home', function () {
     return redirect('/');
@@ -40,6 +42,15 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.e
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow');
+Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
+Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
+Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
+
+Route::get('/manual-reset', [ManualResetController::class, 'showForm'])->name('manual.reset.form');
+Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('manual.reset.process');
+
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
+
+Route::get('/suggestions', [App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestions.index');

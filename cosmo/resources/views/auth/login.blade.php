@@ -46,10 +46,10 @@
                                 </button>
 
                                     <a class="btn btn-link text-white" href="{{ route('manual.reset.form') }}">
-                                        {{ __('Reset Password (Manual)') }}
+                                        {{ __('Forgot Password?') }}
                                     </a>
 
-                            
+
                             </div>
                         </div>
                     </form>
