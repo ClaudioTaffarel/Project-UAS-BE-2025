@@ -50,3 +50,22 @@ body {
     height: auto;
     object-fit: contain;
 }
+
+.sidebar .btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: normal;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar .btn:hover {
+    background-color: transparent;
+    color: #ffeb80;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}

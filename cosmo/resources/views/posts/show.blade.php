@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <img src="{{ asset('storage/' . $post->image_path) }}" class="w-100">
+        <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post Image" style="width:100%; height:auto;">
+        <p>{{ $post->caption }}</p>
+        <p>Posted by: {{ $post->user->username }}</p>
         </div>
         <div class="col-md-4">
             <div class="d-flex align-items-center mb-3">
