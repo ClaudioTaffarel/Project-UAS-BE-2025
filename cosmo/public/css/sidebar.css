@@ -69,3 +69,11 @@ body {
     color: #ffeb80;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
+
+.dosis-title {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    color: white;
+    font-size: 3rem;
+}

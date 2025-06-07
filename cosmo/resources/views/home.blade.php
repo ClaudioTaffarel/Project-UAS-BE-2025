@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<h2 class="mb-4 text-center dosis-title">Let's see what your friends are up to!</h2>
 <div class="container py-4" style="max-width: 500px; margin: auto;">
-    <h2 class="mb-4 text-primary text-center">What's going on the Milky Way</h2>
 
     @forelse ($posts as $post)
-        <div class="card mb-4 mx-auto" 
+        <div class="card mb-4 mx-auto"
              style="background-color: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;">
             <div class="card-header d-flex align-items-center" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                <img 
-                    src="{{ $post->user && $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('user-placeholder.png') }}" 
-                    alt="{{ $post->user->username ?? 'Deleted User' }}" 
+                <img
+                    src="{{ $post->user && $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('user-placeholder.png') }}"
+                    alt="{{ $post->user->username ?? 'Deleted User' }}"
                     style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px;"
                 >
                 <strong>
@@ -46,9 +46,9 @@
 
             <div class="card-body text-white">
                 @if($post->image_path)
-                    <img 
-                        src="{{ asset('storage/' . $post->image_path) }}" 
-                        alt="Post image" 
+                    <img
+                        src="{{ asset('storage/' . $post->image_path) }}"
+                        alt="Post image"
                         class="img-fluid rounded mb-2"
                         style="max-height: 400px; width: 100%; object-fit: cover;"
                     >
@@ -56,7 +56,7 @@
 
                 <p>
                     @if($post->user)
-                        <strong>{{ $post->user->username }}</strong> 
+                        <strong>{{ $post->user->username }}</strong>
                     @endif
                     {{ $post->caption }}
                 </p>

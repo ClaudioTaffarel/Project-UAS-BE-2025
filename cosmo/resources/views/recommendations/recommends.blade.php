@@ -33,7 +33,7 @@
                 @foreach($users->take(3) as $user)
                     <a href="{{ route('profile.show', $user->id) }}" style="text-decoration: none; color: black;">
                         <div style="padding: 10px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
-                            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('default-profile.png') }}" 
+                            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('default-profile.png') }}"
                                  alt="{{ $user->username }}"
                                  style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
                             <div>
@@ -50,7 +50,7 @@
     @endif
 </div>
 
-<h1 class="mb-4 milkyway-title">Whats going on in the milky way style</h1>
+<h2 class="mb-4 text-center dosis-title">Here's What's going on in the Milky Way!</h2>
 
 <style>
     .milkyway-title {
