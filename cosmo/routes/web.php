@@ -1,4 +1,3 @@
-web.php
 <?php
 
 use App\Http\Controllers\PostController;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController; 
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
