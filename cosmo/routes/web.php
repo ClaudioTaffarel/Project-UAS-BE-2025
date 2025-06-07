@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
 
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
@@ -47,3 +48,5 @@ Route::get('/search-users', [UserController::class, 'search'])->name('users.sear
 
 Route::get('/manual-reset', [ManualResetController::class, 'showForm'])->name('manual.reset.form');
 Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('manual.reset.process');
+
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');

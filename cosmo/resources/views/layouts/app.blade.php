@@ -46,6 +46,12 @@
                         </a>
                     </li>
                     @endauth
+                    <li class="nav-item mb-3">
+                        <a class="btn btn-outline-light nav-link fs-5 text-start w-100 d-flex align-items-center"
+                            style="white-space: nowrap;" href="{{ route('messages.index') }}">
+                            <i class="fa fa-envelope me-2"></i> Messages
+                        </a>
+                    </li>
                 </ul>
             </div>
 
