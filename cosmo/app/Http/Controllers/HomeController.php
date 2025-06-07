@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -16,6 +17,14 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        
+    $suggestions = User::where('id', '!=', auth()->id())
+    ->whereDoesntHave('followers', function ($query) {
+        $query->where('follower_id', auth()->id());
+    })
+    ->take(5)
+    ->get();
+
 
         $followingIds = $user->following()->pluck('users.id')->toArray();
 
@@ -25,6 +34,6 @@ class HomeController extends Controller
                      ->latest()
                      ->paginate(10);  // pagination 10 per halaman
 
-        return view('home', compact('posts'));
+        return view('home', compact('posts', 'suggestions'));
     }
 }
