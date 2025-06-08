@@ -1,10 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="mb-4 text-center dosis-title">Let's see what your friends are up to!</h2>
+
+<div class="right-bg-image"></div>
+<img src="{{ asset('/astronots.png') }}" alt="Floating Astronaut" class="floating-astronaut">
+
+
 <div class="container py-4" >
     <div class="row justify-content-center">
         <div class="col-md-7">
+        <h2 class="mb-4 text-center dosis-title">Let's see what your friends</h2>
+        <h2 class="mb-4 text-center dosis-title">are up to!</h2>
         @forelse ($posts as $post)
         <div class="card mb-4 mx-auto"
              style="background-color: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;">
@@ -127,7 +133,7 @@
                 <div class="card mb-4" style="background-color: transparent; color: white; border-radius: 8px; border:none;">
                     <div class="card-header d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
                         <strong>Suggestions For You</strong>
-                    <a href="{{ route('suggestions.index') }}" class="text-decoration-none text-primary">See All</a>
+                    <a href="{{ route('suggestions.index') }}" class="text-decoration-none" style="color: #80dfff;">See All</a>
                     </div>
                     <ul class="list-group list-group-flush">
                         @foreach ($suggestions as $user)
@@ -142,7 +148,7 @@
                                 </div>
                                 <form action="{{ route('follow.store', $user->id) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-sm btn-outline-primary">Follow</button>
+                                    <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
                                 </form>
                             </li>
                         @endforeach
