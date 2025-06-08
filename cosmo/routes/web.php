@@ -14,7 +14,6 @@ use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
-Route::get('/manual-reset', [PasswordResetController::class, 'showResetForm'])->name('manual.reset.form');
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
 
