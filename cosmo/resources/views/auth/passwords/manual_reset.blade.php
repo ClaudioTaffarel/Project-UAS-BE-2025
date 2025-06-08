@@ -1,57 +1,71 @@
-manual_resetblade.php
-@extends('layouts.guest') {{-- Ini asumsi kamu pakai layout bawaan --}}
+
+@extends('layouts.guest')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card shadow-sm" style="width: 400px;">
-        <div class="card-body">
-            <h4 class="card-title text-center mb-4">Manual Password Reset</h4>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5"> {{-- Ukuran form agar lebih kecil --}}
+            <div class="card bg-dark text-white"> {{-- Sesuai style register --}}
+                <div class="card-header text-center bg-dark text-white">Manual Password Reset</div>
 
-            {{-- Tampilkan error jika ada --}}
-            @if ($errors->any())
-                <div class="alert alert-danger small">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="card-body">
+                    {{-- Tampilkan error jika ada --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger small">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    {{-- Tampilkan success message jika ada --}}
+                    @if (session('success'))
+                        <div class="alert alert-success small">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('manual.reset.process') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="username" class="col-md-4 col-form-label text-md-end text-white">Username</label>
+                            <div class="col-md-6">
+                                <input id="username" type="text" name="username" required class="form-control bg-secondary text-white border-0">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end text-white">Email Pengguna</label>
+                            <div class="col-md-6">
+                                <input id="email" type="email" name="email" required class="form-control bg-secondary text-white border-0">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end text-white">Password Baru</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password" name="password" required class="form-control bg-secondary text-white border-0">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-white">Konfirmasi Password</label>
+                            <div class="col-md-6">
+                                <input id="password_confirmation" type="password" name="password_confirmation" required class="form-control bg-secondary text-white border-0">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @endif
-
-            {{-- Tampilkan success message jika ada --}}
-            @if (session('success'))
-                <div class="alert alert-success small">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('manual.reset.process') }}">
-                @csrf
-
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" name="username" required class="form-control form-control-sm">
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Pengguna</label>
-                    <input type="email" name="email" required class="form-control form-control-sm">
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password Baru</label>
-                    <input type="password" name="password" required class="form-control form-control-sm">
-                </div>
-
-                <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Konfirmasi Password Baru</label>
-                    <input type="password" name="password_confirmation" required class="form-control form-control-sm">
-                </div>
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

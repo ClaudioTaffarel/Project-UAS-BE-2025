@@ -4,15 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <img src="{{ asset('storage/' . $post->image_path) }}" class="w-100">
+            <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post Image" style="width:100%; height:auto;">
         </div>
+
         <div class="col-md-4">
             <div class="d-flex align-items-center mb-3">
                 @if($post->user)
-                    <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : 'https://via.placeholder.com/40' }}" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                    <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('user-placeholder.png') }}"
+                         class="rounded-circle me-3"
+                         style="width: 40px; height: 40px; object-fit: cover;">
                     <a href="{{ route('profile.show', $post->user->id) }}" class="text-light text-decoration-none">
                         <strong>{{ $post->user->username }}</strong>
                     </a>
+
                     @if(auth()->id() === $post->user_id)
                         <div class="dropdown ms-auto">
                             <button class="btn btn-link text-light" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +37,7 @@
                         </div>
                     @endif
                 @else
-                    <img src="https://via.placeholder.com/40" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                    <img src="{{ asset('user-placeholder.png') }}" class="rounded-circle me-3" style="width: 40px; height: 40px;">
                     <span class="text-muted">Deleted User</span>
                 @endif
             </div>
@@ -43,6 +47,7 @@
             @else
                 <p>{{ $post->caption }}</p>
             @endif
+
             <hr>
 
             <div class="d-flex align-items-center mb-2">
@@ -55,16 +60,13 @@
                         </button>
                     </form>
                 @else
-
                     <form action="{{ route('likes.store', $post->id) }}" method="POST" class="me-2">
                         @csrf
                         <button type="submit" class="btn btn-link p-0">
-
                             <i class="far fa-heart"></i>
                         </button>
                     </form>
                 @endif
-
                 <span class="text-white"><strong>{{ $post->likes->count() }} likes</strong></span>
             </div>
 
@@ -75,12 +77,17 @@
                 @foreach($post->comments as $comment)
                     <div class="d-flex mb-2">
                         @if($comment->user)
-
+                            <img src="{{ $comment->user->profile_image ? asset('storage/' . $comment->user->profile_image) : asset('user-placeholder.png') }}"
+                                 class="rounded-circle me-2"
+                                 style="width: 32px; height: 32px; object-fit: cover;">
                             <strong class="me-2 text-white">{{ $comment->user->username }}</strong>
                         @else
+                            <img src="{{ asset('user-placeholder.png') }}"
+                                 class="rounded-circle me-2"
+                                 style="width: 32px; height: 32px; object-fit: cover;">
                             <strong class="me-2 text-white">Deleted User</strong>
                         @endif
-                        <p class="mb-0">{{ $comment->comment }}</p>
+                        <p class="mb-0 text-white">{{ $comment->comment }}</p>
 
                         @if(auth()->id() === $comment->user_id || auth()->id() === $post->user_id)
                             <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="ms-auto">
@@ -108,4 +115,3 @@
     </div>
 </div>
 @endsection
-
