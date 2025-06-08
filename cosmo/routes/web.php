@@ -8,8 +8,6 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Auth\ManualResetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
