@@ -50,3 +50,5 @@ Route::get('/manual-reset', [ManualResetController::class, 'showForm'])->name('m
 Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('manual.reset.process');
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
+Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store')->middleware('auth');
