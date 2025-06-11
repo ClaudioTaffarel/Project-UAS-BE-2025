@@ -39,18 +39,46 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'receiver_id' => 'required|exists:users,id',
-            'body' => 'required|string',
+            'body' => 'required|string|max:1000',
         ]);
 
-        Message::create([
-            'sender_id' => Auth::id(),
-            'receiver_id' => $request->receiver_id,
-            'body' => $request->body,
-        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
-        return back();
+        try {
+            $message = Message::create([
+                'sender_id' => Auth::id(),
+                'receiver_id' => $request->receiver_id,
+                'body' => $request->body,
+            ]);
+
+            // Eager load sender information
+            $message->load('sender');
+
+            return response()->json(['message' => $message]);
+
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Message storing failed: ' . $e->getMessage());
+            return response()->json(['error' => 'Server error, could not save message.'], 500);
+        }
+    }
+
+    public function fetch($userId)
+    {
+        $messages = Message::where(function($query) use ($userId) {
+            $query->where('sender_id', Auth::id())
+                  ->where('receiver_id', $userId);
+        })->orWhere(function($query) use ($userId) {
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', Auth::id());
+        })
+        ->orderBy('created_at', 'asc')
+        ->get();
+
+        return response()->json(['messages' => $messages]);
     }
 
     public function destroy(Message $message)
