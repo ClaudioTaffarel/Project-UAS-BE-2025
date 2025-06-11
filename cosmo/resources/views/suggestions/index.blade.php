@@ -14,10 +14,11 @@
                             <div><strong>{{ $user->username }}</strong></div>
                             <small class="text-muted">Suggested for you</small>
                         </div>
-                        <form action="{{ route('follow.store', $user->id) }}" method="POST" class="ms-3">
-                            @csrf
-                            <button class="btn btn-sm btn-outline-primary">Follow</button>
-                        </form>
+                        <form action="{{ route('follow.store', $user) }}" method="POST" style="margin-left: auto;">
+    @csrf
+    <button class="btn btn-sm btn-outline-primary">Follow</button>
+</form>
+
                     </div>
                 </div>
             @endforeach

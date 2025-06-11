@@ -39,7 +39,7 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.e
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
+Route::post('/follow/{user}', [FollowController::class, 'store'])->middleware('auth')->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
