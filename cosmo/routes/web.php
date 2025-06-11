@@ -52,3 +52,4 @@ Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('m
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
 Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store')->middleware('auth');
+Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware('auth');

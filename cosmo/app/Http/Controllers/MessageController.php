@@ -52,4 +52,16 @@ class MessageController extends Controller
 
         return back();
     }
+
+    public function destroy(Message $message)
+    {
+        // Pastikan hanya pengirim yang bisa menghapus pesan
+        if ($message->sender_id !== Auth::id()) {
+            return back()->with('error', 'Anda tidak memiliki izin untuk menghapus pesan ini.');
+        }
+
+        $message->delete();
+
+        return back()->with('success', 'Pesan berhasil dihapus.');
+    }
 }

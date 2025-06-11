@@ -53,7 +53,16 @@
                             @foreach($messages as $message)
                                 @if($message->sender_id == Auth::id())
                                     {{-- Outgoing Message --}}
-                                    <div class="d-flex justify-content-end mb-3">
+                                    <div class="d-flex justify-content-end mb-3 align-items-center">
+                                        <div class="message-actions">
+                                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesan ini?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm delete-btn" title="Hapus pesan">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                         <div class="bg-primary text-white rounded p-2">
                                             <p class="mb-0">{{ $message->body }}</p>
                                         </div>
@@ -125,6 +134,24 @@
     }
     a.list-group-item {
         color: #212529;
+    }
+    .message-actions {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+    .d-flex.justify-content-end:hover .message-actions {
+        visibility: visible;
+        opacity: 1;
+    }
+    .delete-btn {
+        background: none;
+        border: none;
+        color: #dc3545;
+        padding: 0 .5rem;
+    }
+    .delete-btn:hover {
+        color: #a71d2a;
     }
 </style>
 @endpush
