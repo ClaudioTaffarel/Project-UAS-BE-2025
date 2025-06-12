@@ -15,25 +15,26 @@ class HomeController extends Controller
     }
 
     public function index()
-    {
-        $user = Auth::user();
-        
+{
+    $user = Auth::user();
+
     $suggestions = User::where('id', '!=', auth()->id())
-    ->whereDoesntHave('followers', function ($query) {
-        $query->where('follower_id', auth()->id());
-    })
-    ->take(5)
-    ->get();
+        ->whereDoesntHave('followers', function ($query) {
+            $query->where('follower_id', auth()->id());
+        })
+        ->whereNotNull('profile_image') // pastikan ada isi
+        ->where('profile_image', '!=', 'user-placeholder.png') // pastikan bukan placeholder
+        ->take(5)
+        ->get();
 
+    $followingIds = $user->following()->pluck('users.id')->toArray();
+    $followingIds[] = $user->id;
 
-        $followingIds = $user->following()->pluck('users.id')->toArray();
+    $posts = Post::whereIn('user_id', $followingIds)
+                 ->latest()
+                 ->paginate(10);  // pagination 10 per halaman
 
-        $followingIds[] = $user->id;
+    return view('home', compact('posts', 'suggestions'));
+}
 
-        $posts = Post::whereIn('user_id', $followingIds)
-                     ->latest()
-                     ->paginate(10);  // pagination 10 per halaman
-
-        return view('home', compact('posts', 'suggestions'));
-    }
 }

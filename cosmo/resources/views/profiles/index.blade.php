@@ -1,64 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 text-center">
-            <img
-                src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('/user-placeholder.png') }}"
-                class="rounded-circle"
-                style="width: 150px; height: 150px; object-fit: cover;">
-        </div>
-
-        <div class="col-md-9">
-            <div class="d-flex align-items-center">
-                <h1>{{ $user->username }}</h1>
-
-                @if(auth()->id() === $user->id)
-                    <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-outline-light ms-4">Edit Profile</a>
-                @else
-                    <div class="ms-4">
-                        @if(auth()->user()->isFollowing($user->id))
-                            <form action="{{ route('unfollow', $user->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-outline-light">Unfollow</button>
-                            </form>
-                        @else
-                            <form action="{{ route('follow', $user->id) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-primary">Follow</button>
-                            </form>
-                        @endif
+<div class="container py-4 text-white">
+    <h2 class="mb-4">Suggested Users</h2>
+    @if($suggestions->count())
+        <div class="row">
+            @foreach($suggestions as $user)
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center bg-dark p-3 rounded shadow-sm">
+                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
+                            alt="{{ $user->username }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 15px;">
+                        <div class="flex-grow-1">
+                            <div><strong>{{ $user->username }}</strong></div>
+                            <small class="text-muted">Suggested for you — ID: {{ $user->id }}</small>
+                        </div>
+                        <form action="{{ route('follow.store', $user->id) }}" method="POST" class="ms-3">
+                            @csrf
+                            <button class="btn btn-sm btn-outline-primary">Follow</button>
+                        </form>
                     </div>
-                @endif
-            </div>
-
-            <div class="d-flex mt-3">
-                <div class="me-4"><strong>{{ $user->posts->count() }}</strong> posts</div>
-                <div class="me-4"><strong>{{ $user->followers()->count() }}</strong> followers</div>
-                <div><strong>{{ $user->following()->count() }}</strong> following</div>
-            </div>
-
-            <div class="mt-3">
-                <h5>{{ $user->name }}</h5>
-                <p>{{ $user->bio }}</p>
-            </div>
+                </div>
+            @endforeach
         </div>
-    </div>
-
-    <div class="row mt-5 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-        @foreach($user->posts as $post)
-            <div class="col">
-                <a href="{{ route('posts.show', $post->id) }}">
-                    <div style="width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 10px;">
-                        <img src="{{ asset('storage/' . $post->image_path) }}"
-                             alt="Post Image"
-                             style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                </a>
-            </div>
-        @endforeach
-    </div>
+    @else
+        <p>No suggestions found.</p>
+    @endif
 </div>
 @endsection

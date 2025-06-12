@@ -126,38 +126,40 @@
     {{ $posts->links() }} {{-- pagination links --}}
         </div>
 
-        <div class="col-md-4">
-            <div class="position-sticky" style="top: 80px;">
-                            @if($suggestions->count())
-            <div  style="position: fixed; right: 20px; width: 300px; z-index: 1000;">
-                <div class="card mb-4" style="background-color: transparent; color: white; border-radius: 8px; border:none;">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
-                        <strong>Suggestions For You</strong>
+<div class="col-md-4">
+    <div class="position-sticky" style="top: 80px;">
+        @if($suggestions->count())
+        <div style="position: fixed; right: 20px; width: 300px; z-index: 1000;">
+            <div class="card mb-4" style="background-color: transparent; color: white; border-radius: 8px; border:none;">
+                <div class="card-header d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
+                    <strong>Suggestions For You</strong>
                     <a href="{{ route('suggestions.index') }}" class="text-decoration-none" style="color: #80dfff;">See All</a>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach ($suggestions as $user)
-                            <li class="list-group-item text-white d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
-                                        alt="{{ $user->username }}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; background-color:rgba(26, 26, 26, 0);">
-                                    <div>
-                                        <div>{{ $user->username }}</div>
-                                        <small class="text-white-50">Suggested for you</small>
-                                    </div>
-                                </div>
-                                <form action="{{ route('follow.store', $user->id) }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
-                                </form>
-                            </li>
-                        @endforeach
-                    </ul>
                 </div>
-            @endif
-            </div>
+                <ul class="list-group list-group-flush">
+                    @foreach ($suggestions->sortByDesc('id') as $user)
+                        <li class="list-group-item text-white d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
+                                     alt="{{ $user->username }}"
+                                     style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+                                <div>
+                                    <div>{{ $user->username }}</div>
+                                    <small class="text-white-50">Suggested for you</small>
+                                </div>
+                            </div>
+                            <form action="{{ route('follow.store', $user->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
+                            </form>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
+        @endif
+    </div>
+</div>
+
     </div>
 </div>
 @endsection
