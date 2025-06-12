@@ -1,3 +1,4 @@
+web.php
 <?php
 
 use App\Http\Controllers\PostController;
@@ -51,3 +52,4 @@ Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('m
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
 
 Route::get('/suggestions', [App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestions.index');
+
