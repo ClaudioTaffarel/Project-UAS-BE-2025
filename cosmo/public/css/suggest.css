@@ -1,0 +1,20 @@
+.suggestion-card {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.suggestion-card:hover {
+    background-color: #1f1f1f;
+    transform: translateY(-2px);
+}
+
+.suggestion-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.follow-form {
+    margin-left: auto;
+}

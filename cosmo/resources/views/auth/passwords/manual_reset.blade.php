@@ -7,11 +7,12 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card bg-dark text-white">
-                <div class="card-header text-center bg-dark text-white">Manual Password Reset</div>
+                <div class="card-header text-center bg-dark text-white">Password Reset</div>
 
                 <div class="card-body">
+
                     @if ($errors->any())
-                        <div class="my-alert-error">
+                        <div class="alerttt">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -21,7 +22,7 @@
                     @endif
 
                     @if (session('success'))
-                        <div class="my-alert-success">
+                        <div class="alertsucc">
                             {{ session('success') }}
                         </div>
                     @endif

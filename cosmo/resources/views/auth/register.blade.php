@@ -12,7 +12,7 @@
                 <div class="card-body">
 
                     @if ($errors->any())
-                        <div class="my-alert-error">
+                        <div class="alertttt">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -22,7 +22,7 @@
                     @endif
 
                     @if (session('success'))
-                        <div class="my-alert-success">
+                        <div class="alertsucc">
                             {{ session('success') }}
                         </div>
                     @endif
