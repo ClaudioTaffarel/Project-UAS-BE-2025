@@ -25,7 +25,7 @@
                                 <button class="btn btn-outline-light">Unfollow</button>
                             </form>
                         @else
-                            <form action="{{ route('follow', $user->id) }}" method="POST">
+                            <form action="{{ route('follow.store', $user->id) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-primary">Follow</button>
                             </form>

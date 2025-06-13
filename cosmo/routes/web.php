@@ -40,7 +40,7 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.e
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
+Route::post('/follow/{user}', [FollowController::class, 'store'])->middleware('auth')->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
@@ -52,4 +52,3 @@ Route::post('/manual-reset', [ManualResetController::class, 'process'])->name('m
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('auth');
 
 Route::get('/suggestions', [App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestions.index');
-

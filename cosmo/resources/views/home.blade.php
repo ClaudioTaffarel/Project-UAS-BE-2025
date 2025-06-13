@@ -136,22 +136,24 @@
                     <a href="{{ route('suggestions.index') }}" class="text-decoration-none" style="color: #80dfff;">See All</a>
                     </div>
                     <ul class="list-group list-group-flush">
-                        @foreach ($suggestions as $user)
-                            <li class="list-group-item text-white d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
-                                        alt="{{ $user->username }}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; background-color:rgba(26, 26, 26, 0);">
-                                    <div>
-                                        <div>{{ $user->username }}</div>
-                                        <small class="text-white-50">Suggested for you</small>
-                                    </div>
-                                </div>
-                                <form action="{{ route('follow.store', $user->id) }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
-                                </form>
-                            </li>
-                        @endforeach
+                       @foreach ($suggestions as $user)
+                  <li class="list-group-item text-white d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
+                          <a href="{{ route('profile.show', $user->id) }}" class="text-decoration-none text-white d-flex align-items-center">
+                            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
+                        alt="{{ $user->username }}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; background-color:rgba(26, 26, 26, 0);">
+                  <div>
+                        <div>{{ $user->username }}</div>
+                        <small class="text-white-50">Suggested for you</small>
+                 </div>
+             </a>
+                <form action="{{ route('follow.store', $user->id) }}" method="POST">
+                    @csrf
+             <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
+        </form>
+</li>
+@endforeach
+
+
                     </ul>
                 </div>
             @endif
