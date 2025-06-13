@@ -38,28 +38,44 @@
 
                     <div class="flex-grow-1 overflow-auto px-3 py-2 chat-thread" id="chat-thread">
                         @foreach($messages as $message)
-                            <div class="d-flex mb-3">
-                                <img src="{{ $message->sender->profile_image ? asset('storage/' . $message->sender->profile_image) : asset('user-placeholder.png') }}"
-                                    alt="avatar"
-                                    class="rounded-circle me-2"
-                                    style="width: 32px; height: 32px; object-fit: cover;">
-                                <div class="flex-grow-1">
-                                    <strong class="text-white d-block mb-1">{{ $message->sender->username }}</strong>
-                                    <div class="d-flex align-items-center">
-                                        <div class="{{ $message->sender_id == auth()->id() ? 'bg-primary' : 'bg-secondary' }} text-white rounded p-2 mb-1 chat-bubble">
-                                            {{ $message->body }}
-                                        </div>
-                                        @if($message->sender_id == auth()->id())
-                                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="ms-2">
+                            @if ($message->sender_id == auth()->id())
+                                {{-- Authenticated user's message (right) --}}
+                                <div class="d-flex justify-content-end mb-3">
+                                    <div class="text-end">
+                                        <strong class="text-white d-block mb-1">{{ $message->sender->username }}</strong>
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="me-2">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">&times;</button>
                                             </form>
-                                        @endif
+                                            <div class="bg-primary text-white rounded p-2 chat-bubble">
+                                                {{ $message->body }}
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">{{ $message->created_at->diffForHumans() }}</small>
                                     </div>
-                                    <small class="text-muted">{{ $message->created_at->diffForHumans() }}</small>
+                                    <img src="{{ $message->sender->profile_image ? asset('storage/' . $message->sender->profile_image) : asset('user-placeholder.png') }}"
+                                         alt="avatar"
+                                         class="rounded-circle ms-2"
+                                         style="width: 32px; height: 32px; object-fit: cover;">
                                 </div>
-                            </div>
+                            @else
+                                {{-- Other user's message (left) --}}
+                                <div class="d-flex mb-3">
+                                    <img src="{{ $message->sender->profile_image ? asset('storage/' . $message->sender->profile_image) : asset('user-placeholder.png') }}"
+                                         alt="avatar"
+                                         class="rounded-circle me-2"
+                                         style="width: 32px; height: 32px; object-fit: cover;">
+                                    <div>
+                                        <strong class="text-white d-block mb-1">{{ $message->sender->username }}</strong>
+                                        <div class="bg-secondary text-white rounded p-2 mb-1 chat-bubble">
+                                            {{ $message->body }}
+                                        </div>
+                                        <small class="text-muted">{{ $message->created_at->diffForHumans() }}</small>
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
 
