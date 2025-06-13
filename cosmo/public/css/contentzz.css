@@ -1,0 +1,45 @@
+body {
+    background-image: url('/spacebg0.png');
+    background-size: contain;
+    background-repeat: repeat;
+    margin: 0;
+    color: white;
+}
+
+.dosis-title {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    color: white;
+    font-size: 3rem;
+}
+
+.logo-img {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.floating-astronaut {
+    position: fixed;
+    bottom: 20px;
+    right: 60px;
+    width: 220px;
+    height: auto;
+    z-index: 9999;
+    animation: floatUpDown 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+

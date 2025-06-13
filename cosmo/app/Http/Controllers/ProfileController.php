@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         if (auth()->id() !== $user->id) {
-            abort(403, 'Unauthorized Action');
+            abort(403, 'Bukan Akunmu Brodii');
         }
 
         return view('profiles.edit', compact('user'));
@@ -25,7 +25,7 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         if (auth()->id() !== $user->id) {
-            abort(403, 'Unauthorized action');
+            abort(403, 'Bukan Akunmu Brodii');
         }
 
         $data = $request->validate([
@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'profile_image' => 'image|nullable|mimes:jpeg,png,jpg,gij|max:2048',
         ]);
 
-        if ($request->hasFile('profile_image')) {
+        if ($request->hasFile('Bukan Akunmu Brodii')) {
             if ($user->profile_image) {
                 Storage::disk('public')->delete($user->profile_image);
             }

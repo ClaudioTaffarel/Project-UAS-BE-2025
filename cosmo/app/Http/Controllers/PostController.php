@@ -49,22 +49,19 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-
-        // Check if the authenticated user is the same as the post user
         if (auth()->id() !== $post->user_id) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Bukan Akunmu Brodii');
         }
-        
+
         return view('posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
     {
-        // Check if the authenticated user is the same as the post user
         if (auth()->id() !== $post->user_id) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Bukan Akunmu Brodii');
         }
-        
+
         $data = $request->validate([
             'caption' => 'required',
         ]);
@@ -76,16 +73,11 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-
-        // Check if the authenticated user is the same as the post user
         if (auth()->id() !== $post->user_id) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Bukan Akunmu Brodii');
         }
-        
-        // Delete the image file
+
         Storage::disk('public')->delete($post->image_path);
-        
-        // Delete the post
 
         $post->delete();
 

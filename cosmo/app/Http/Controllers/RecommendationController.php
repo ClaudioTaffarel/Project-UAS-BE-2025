@@ -16,11 +16,11 @@ class RecommendationController extends Controller
         $followingIds = $user->following()->pluck('users.id');
 
             $posts = Post::where('user_id', '!=', $user->id)
-                 ->with('user')
-                 ->inRandomOrder()
-                 ->take(20)
-                 ->get();
-        
+            ->with('user')
+            ->inRandomOrder()
+            ->take(20)
+            ->get();
+
         $users = User::select('id', 'username', 'name')->limit(500)->get();
 
         return view('recommendations.recommends', compact('posts', 'users'));

@@ -1,0 +1,31 @@
+.my-alert-error {
+    background-color: #ffe5e5;
+    border-left: 4px solid #ff5a5a;
+    padding: 12px;
+    color: #c0392b;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    border-radius: 4px;
+}
+
+.my-alert-success {
+    background-color: #e6ffea;
+    border-left: 4px solid #2ecc71;
+    padding: 12px;
+    color: #2d6a4f;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    border-radius: 4px;
+}
+
+.my-alert-error ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.center-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}

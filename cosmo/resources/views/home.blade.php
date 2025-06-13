@@ -5,7 +5,6 @@
 <div class="right-bg-image"></div>
 <img src="{{ asset('/astronots.png') }}" alt="Floating Astronaut" class="floating-astronaut">
 
-
 <div class="container py-4" >
     <div class="row justify-content-center">
         <div class="col-md-7">
