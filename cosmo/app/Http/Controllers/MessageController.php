@@ -11,13 +11,13 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        $users = Auth::user()->following;
         return view('messages.index', ['users' => $users]);
     }
 
     public function show($userId)
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        $users = Auth::user()->following;
         $receiver = User::findOrFail($userId);
 
         $messages = Message::where(function($query) use ($userId) {
@@ -39,30 +39,20 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+        $request->validate([
             'receiver_id' => 'required|exists:users,id',
             'body' => 'required|string|max:1000',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
         try {
             $message = Message::create([
                 'sender_id' => Auth::id(),
                 'receiver_id' => $request->receiver_id,
                 'body' => $request->body,
             ]);
-
-            // Eager load sender information
-            $message->load('sender');
-
-            return response()->json(['message' => $message]);
-
+            return redirect()->route('messages.show', $request->receiver_id)->with('success', 'Message sent successfully.');
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('Message storing failed: ' . $e->getMessage());
-            return response()->json(['error' => 'Server error, could not save message.'], 500);
+            return back()->with('error', 'Server error, could not save message.');
         }
     }
 
@@ -83,7 +73,6 @@ class MessageController extends Controller
 
     public function destroy(Message $message)
     {
-        // Pastikan hanya pengirim yang bisa menghapus pesan
         if ($message->sender_id !== Auth::id()) {
             return back()->with('error', 'Anda tidak memiliki izin untuk menghapus pesan ini.');
         }

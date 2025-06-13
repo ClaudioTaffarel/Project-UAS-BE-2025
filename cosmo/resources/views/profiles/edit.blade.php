@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="profile_image" class="form-label text-white">Profile Image</label>
+                            <label for="profile_image" class="form-label text-white" id="profile_image" name="profile_image">Profile Image</label>
                             <input id="profile_image"
                                    type="file"
                                    class="form-control bg-dark text-white border-secondary"

@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'profile_image' => 'image|nullable|mimes:jpeg,png,jpg,gij|max:2048',
         ]);
 
-        if ($request->hasFile('Bukan Akunmu Brodii')) {
+        if ($request->hasFile('profile_image')) {
             if ($user->profile_image) {
                 Storage::disk('public')->delete($user->profile_image);
             }

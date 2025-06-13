@@ -1,6 +1,5 @@
 <!doctype html>
 <head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Cosmo</title>
 
     <!-- Import Bootstrap dan Google Fonts -->
