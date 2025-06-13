@@ -1,16 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-4" style="max-width: 500px; margin: auto;">
-    <h2 class="mb-4 text-primary text-center">What's going on the Milky Way</h2>
 
-    @forelse ($posts as $post)
-        <div class="card mb-4 mx-auto" 
+<div class="right-bg-image"></div>
+<img src="{{ asset('/astronots.png') }}" alt="Floating Astronaut" class="floating-astronaut">
+
+
+<div class="container py-4" >
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+        <h2 class="mb-4 text-center dosis-title">Let's see what your friends</h2>
+        <h2 class="mb-4 text-center dosis-title">are up to!</h2>
+        @forelse ($posts as $post)
+        <div class="card mb-4 mx-auto"
              style="background-color: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;">
             <div class="card-header d-flex align-items-center" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                <img 
-                    src="{{ $post->user && $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('user-placeholder.png') }}" 
-                    alt="{{ $post->user->username ?? 'Deleted User' }}" 
+                <img
+                    src="{{ $post->user && $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : asset('user-placeholder.png') }}"
+                    alt="{{ $post->user->username ?? 'Deleted User' }}"
                     style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px;"
                 >
                 <strong>
@@ -46,9 +53,9 @@
 
             <div class="card-body text-white">
                 @if($post->image_path)
-                    <img 
-                        src="{{ asset('storage/' . $post->image_path) }}" 
-                        alt="Post image" 
+                    <img
+                        src="{{ asset('storage/' . $post->image_path) }}"
+                        alt="Post image"
                         class="img-fluid rounded mb-2"
                         style="max-height: 400px; width: 100%; object-fit: cover;"
                     >
@@ -56,7 +63,7 @@
 
                 <p>
                     @if($post->user)
-                        <strong>{{ $post->user->username }}</strong> 
+                        <strong>{{ $post->user->username }}</strong>
                     @endif
                     {{ $post->caption }}
                 </p>
@@ -117,5 +124,42 @@
     @endforelse
 
     {{ $posts->links() }} {{-- pagination links --}}
+        </div>
+
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 80px;">
+                            @if($suggestions->count())
+            <div  style="position: fixed; right: 20px; width: 300px; z-index: 1000;">
+                <div class="card mb-4" style="background-color: transparent; color: white; border-radius: 8px; border:none;">
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
+                        <strong>Suggestions For You</strong>
+                    <a href="{{ route('suggestions.index') }}" class="text-decoration-none" style="color: #80dfff;">See All</a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                       @foreach ($suggestions as $user)
+                  <li class="list-group-item text-white d-flex justify-content-between align-items-center" style="background-color:transparent; border:none;">
+                          <a href="{{ route('profile.show', $user->id) }}" class="text-decoration-none text-white d-flex align-items-center">
+                            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('user-placeholder.png') }}"
+                        alt="{{ $user->username }}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 10px; background-color:rgba(26, 26, 26, 0);">
+                  <div>
+                        <div>{{ $user->username }}</div>
+                        <small class="text-white-50">Suggested for you</small>
+                 </div>
+             </a>
+                <form action="{{ route('follow.store', $user->id) }}" method="POST">
+                    @csrf
+             <button class="btn btn-sm" style="color: #80dfff; border: 1px solid #80dfff;">Follow</button>
+        </form>
+</li>
+@endforeach
+
+
+                    </ul>
+                </div>
+            @endif
+            </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

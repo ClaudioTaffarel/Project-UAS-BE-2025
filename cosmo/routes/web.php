@@ -1,3 +1,4 @@
+web.php
 <?php
 
 use App\Http\Controllers\PostController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
-
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home.index');
 
@@ -40,7 +40,7 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.e
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow');
+Route::post('/follow/{user}', [FollowController::class, 'store'])->middleware('auth')->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('unfollow');
 
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
@@ -54,3 +54,5 @@ Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messag
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store')->middleware('auth');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware('auth');
 Route::get('/messages/fetch/{user}', [MessageController::class, 'fetch'])->name('messages.fetch')->middleware('auth');
+
+Route::get('/suggestions', [App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestions.index');
