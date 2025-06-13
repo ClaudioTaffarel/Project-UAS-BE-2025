@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/profilee.css') }}" rel="stylesheet">
+
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
             <img
                 src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('/user-placeholder.png') }}"
-                class="rounded-circle"
-                style="width: 150px; height: 150px; object-fit: cover;">
+                class="profile-avatar">
         </div>
 
         <div class="col-md-9">
@@ -51,10 +52,10 @@
         @foreach($user->posts as $post)
             <div class="col">
                 <a href="{{ route('posts.show', $post->id) }}">
-                    <div style="width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 10px;">
+                    <div class="post-thumbnail-wrapper">
                         <img src="{{ asset('storage/' . $post->image_path) }}"
                              alt="Post Image"
-                             style="width: 100%; height: 100%; object-fit: cover;">
+                             class="post-thumbnail-img">
                     </div>
                 </a>
             </div>

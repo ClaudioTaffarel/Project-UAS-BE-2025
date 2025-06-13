@@ -29,7 +29,7 @@ class ManualResetController extends Controller
                     ->first();
 
         if (!$user) {
-            return back()->withErrors(['username' => 'Username dan email tidak cocok.']);
+            return back()->withErrors(['username' => 'Username dan email NGAA cocok']);
         }
 
         $user->password = Hash::make($request->password);

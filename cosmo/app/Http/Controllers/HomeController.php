@@ -17,22 +17,21 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
-    $suggestions = User::where('id', '!=', auth()->id())
-    ->whereDoesntHave('followers', function ($query) {
-        $query->where('follower_id', auth()->id());
-    })
-    ->take(5)
-    ->get();
 
+        $suggestions = User::where('id', '!=', auth()->id())
+        ->whereDoesntHave('followers', function ($query) {
+            $query->where('follower_id', auth()->id());
+        })
+        ->take(5)
+        ->get();
 
         $followingIds = $user->following()->pluck('users.id')->toArray();
 
         $followingIds[] = $user->id;
 
         $posts = Post::whereIn('user_id', $followingIds)
-                     ->latest()
-                     ->paginate(10);  // pagination 10 per halaman
+        ->latest()
+        ->paginate(10);
 
         return view('home', compact('posts', 'suggestions'));
     }

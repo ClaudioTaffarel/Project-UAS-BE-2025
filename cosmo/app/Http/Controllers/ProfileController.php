@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         if (auth()->id() !== $user->id) {
-            abort(403, 'Unauthorized Action');
+            abort(403, 'Bukan Akunmu Brodii');
         }
 
         return view('profiles.edit', compact('user'));
@@ -25,7 +25,7 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         if (auth()->id() !== $user->id) {
-            abort(403, 'Unauthorized action');
+            abort(403, 'Bukan Akunmu Brodii');
         }
 
         $data = $request->validate([
