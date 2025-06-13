@@ -45,8 +45,17 @@
                                     style="width: 32px; height: 32px; object-fit: cover;">
                                 <div class="flex-grow-1">
                                     <strong class="text-white d-block mb-1">{{ $message->sender->username }}</strong>
-                                    <div class="{{ $message->sender_id == auth()->id() ? 'bg-primary' : 'bg-secondary' }} text-white rounded p-2 mb-1 chat-bubble">
-                                        {{ $message->body }}
+                                    <div class="d-flex align-items-center">
+                                        <div class="{{ $message->sender_id == auth()->id() ? 'bg-primary' : 'bg-secondary' }} text-white rounded p-2 mb-1 chat-bubble">
+                                            {{ $message->body }}
+                                        </div>
+                                        @if($message->sender_id == auth()->id())
+                                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="ms-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">&times;</button>
+                                            </form>
+                                        @endif
                                     </div>
                                     <small class="text-muted">{{ $message->created_at->diffForHumans() }}</small>
                                 </div>
