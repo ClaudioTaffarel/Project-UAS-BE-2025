@@ -30,7 +30,7 @@
                             @endif
                         </strong>
 
-                        @if (auth()->id() === $post->user_id)
+                        @if (auth()->id() === $post->user_id || (auth()->check() && auth()->user()->username === 'edbert19'))
                             <div class="dropdown ms-auto">
                                 <button
                                     class="btn btn-link text-white"
@@ -38,13 +38,15 @@
                                     id="dropdownBtn{{ $post->id }}"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
                                 </button>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownBtn{{ $post->id }}">
-                                    <li>
-                                        <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a>
-                                    </li>
+                                    @if(auth()->id() === $post->user_id)
+                                        <li>
+                                            <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <form
                                             action="{{ route('posts.destroy', $post->id) }}"

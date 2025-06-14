@@ -73,16 +73,20 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if (auth()->id() !== $post->user_id) {
-            abort(403, 'Bukan Akunmu Brodii');
+        $currentUser = auth()->user();
+
+        // Izinkan hapus jika pemilik post ATAU username-nya adalah edbert19 (admin)
+        if ($currentUser->id !== $post->user_id && $currentUser->username !== 'edbert19') {
+            abort(403, 'Lu bukan pemilik post, dan bukan admin juga');
         }
 
         Storage::disk('public')->delete($post->image_path);
 
         $post->delete();
 
-        return redirect('/profile/' . auth()->user()->id);
+        return redirect()->back()->with('success', 'Post berhasil dihapus');
     }
+
 
 }
 

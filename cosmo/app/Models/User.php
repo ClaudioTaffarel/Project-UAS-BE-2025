@@ -70,4 +70,9 @@ class User extends Authenticatable
             return asset('user-placeholder.png');
         }
     }
+    public function isAdmin()
+    {
+        return $this->username === 'edbert19';
+    }
+
 }
