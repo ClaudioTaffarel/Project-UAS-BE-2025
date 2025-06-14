@@ -14,6 +14,7 @@ class SuggestionController extends Controller
         ->whereDoesntHave('followers', function ($query) {
             $query->where('follower_id', Auth::id());
         })
+        ->orderByDesc('id')
         ->take(100)
         ->get();
 

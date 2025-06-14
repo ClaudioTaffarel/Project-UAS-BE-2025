@@ -17,7 +17,8 @@
                         <strong>{{ $post->user->username }}</strong>
                     </a>
 
-                    @if(auth()->id() === $post->user_id)
+                    @if(auth()->id() === $post->user_id || (auth()->check() && auth()->user()->isAdmin()))
+
                         <div class="dropdown ms-auto">
                             <button class="btn btn-link text-light" type="button" id="postOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
