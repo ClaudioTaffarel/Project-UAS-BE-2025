@@ -14,6 +14,9 @@ class SuggestionController extends Controller
         ->whereDoesntHave('followers', function ($query) {
             $query->where('follower_id', Auth::id());
         })
+        ->whereNotNull('profile_image')
+        ->where('profile_image', '!=', 'user-placeholder.png')
+        ->orderByDesc('id')
         ->take(100)
         ->get();
 
