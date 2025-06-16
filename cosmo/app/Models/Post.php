@@ -10,7 +10,6 @@ class Post extends Model
     protected $fillable = [
         'caption',
         'image_path',
-        'image_url',
         'user_id',
     ];
 
