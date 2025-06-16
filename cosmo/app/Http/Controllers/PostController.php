@@ -13,12 +13,14 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
+    /*
     public function index()
     {
         $posts = Post::with('user')->latest()->get();
         return view('posts.index', compact('posts'));
     }
-
+    */
+    
     public function create()
     {
         return view('posts.create');

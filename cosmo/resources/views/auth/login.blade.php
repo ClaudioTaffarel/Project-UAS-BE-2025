@@ -68,6 +68,17 @@
                                 </a>
                             </div>
                         </div>
+
+                        <div class="row mt-3">
+                            <div class="col text-center">
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label text-white" for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
