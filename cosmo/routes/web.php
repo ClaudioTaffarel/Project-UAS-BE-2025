@@ -24,7 +24,7 @@ Route::get('/home', function () {
 Auth::routes();
 
 // FOR CREATING, EDITING, N DELETING POSTS
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+// Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
@@ -62,7 +62,7 @@ Route::get('/messages', [MessageController::class, 'index'])->name('messages.ind
 Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show')->middleware('auth');
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store')->middleware('auth');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware('auth');
-Route::get('/messages/fetch/{user}', [MessageController::class, 'fetch'])->name('messages.fetch')->middleware('auth');
+// Route::get('/messages/fetch/{user}', [MessageController::class, 'fetch'])->name('messages.fetch')->middleware('auth');
 
 // FOR SUGGESTIONS BAR (the green tv on home page)
 Route::get('/suggestions', [App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestions.index');
