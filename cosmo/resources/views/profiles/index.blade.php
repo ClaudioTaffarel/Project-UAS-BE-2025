@@ -50,7 +50,7 @@
 
     <div class="profile-post-grid">
         @foreach($user->posts as $post)
-            <div class="col">
+            <div class="col position-relative">
                 <a href="{{ route('posts.show', $post->id) }}">
                     <div class="post-thumbnail-wrapper">
                         <img src="{{ asset('storage/' . $post->image_path) }}"

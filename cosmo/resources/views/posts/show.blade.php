@@ -31,6 +31,7 @@
                                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <input type="hidden" name="redirect_from" value="recommendation">
                                         <button type="submit" class="dropdown-item text-danger">Delete</button>
                                     </form>
                                 </li>

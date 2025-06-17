@@ -73,21 +73,27 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
 
-    public function destroy(Post $post)
+    public function destroy(Request $request, $id)
     {
-        $currentUser = auth()->user();
+        $post = Post::findOrFail($id);
 
-        // Izinkan hapus jika pemilik post ATAU username-nya adalah edbert19 (admin)
-        if ($currentUser->id !== $post->user_id && $currentUser->username !== 'edbert19') {
-            abort(403, 'Lu bukan pemilik post, dan bukan admin juga');
+        if (auth()->id() !== $post->user_id && !auth()->user()->isAdmin()) {
+            abort(403);
         }
 
-        Storage::disk('public')->delete($post->image_path);
+        if ($post->image_path && \Storage::exists($post->image_path)) {
+            \Storage::delete($post->image_path);
+        }
 
         $post->delete();
 
-        return redirect()->back()->with('success', 'Post berhasil dihapus');
+        $redirect = $request->input('redirect_from') === 'recommendation'
+            ? route('recommendations.index') // Ganti sesuai route rekomendasi kamu
+            : route('home');
+
+        return redirect($redirect)->with('status', 'Post deleted successfully.');
     }
+
 
 
 }
