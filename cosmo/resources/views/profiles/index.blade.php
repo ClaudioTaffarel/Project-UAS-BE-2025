@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="row mt-5 row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div class="profile-post-grid">
         @foreach($user->posts as $post)
             <div class="col">
                 <a href="{{ route('posts.show', $post->id) }}">

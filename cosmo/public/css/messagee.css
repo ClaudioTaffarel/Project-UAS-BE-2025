@@ -48,7 +48,6 @@ body {
     border-radius: 10px;
 }
 
-/* Fixes untuk layout card agar tinggi tetap dan tidak bergeser */
 .card {
     min-height: 300px;
     max-height: 100%;
@@ -70,7 +69,6 @@ body {
     background-color: #1e1e1e;
 }
 
-/* Optional: prevent shrinking bubbles */
 .chat-bubble {
     max-width: 80%;
     word-break: break-word;
