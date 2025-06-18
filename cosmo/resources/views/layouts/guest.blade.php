@@ -2,14 +2,13 @@
 <head>
     <title>cosmo</title>
 
-    <!-- Import Bootstrap dan Google Fonts -->
+    <!-- Import Bootstrap dan Fonts dr Google Fonts-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Miniver&family=Pacifico&display=swap" rel="stylesheet">
 
-    <!-- css yg dipake: -->
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
 </head>
 <body>

@@ -22,7 +22,7 @@ class HomeController extends Controller
         ->whereDoesntHave('followers', function ($query) {
             $query->where('follower_id', auth()->id());
         })
-        ->whereNotNull('profile_image') // pastikan ada isiAdd commentMore actions
+        ->whereNotNull('profile_image')
         ->where('profile_image', '!=', 'user-placeholder.png')
         ->take(5)
         ->get();

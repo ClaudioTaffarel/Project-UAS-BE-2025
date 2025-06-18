@@ -39,7 +39,6 @@
                     <div class="flex-grow-1 overflow-auto px-3 py-2 chat-thread" id="chat-thread">
                         @foreach($messages as $message)
                             @if ($message->sender_id == auth()->id())
-                                {{-- Authenticated user's message (right) --}}
                                 <div class="d-flex justify-content-end mb-3">
                                     <div class="text-end">
                                         <strong class="text-white d-block mb-1">{{ $message->sender->username }}</strong>
@@ -61,7 +60,6 @@
                                          style="width: 32px; height: 32px; object-fit: cover;">
                                 </div>
                             @else
-                                {{-- Other user's message (left) --}}
                                 <div class="d-flex mb-3">
                                     <img src="{{ $message->sender->profile_image ? asset('storage/' . $message->sender->profile_image) : asset('user-placeholder.png') }}"
                                          alt="avatar"

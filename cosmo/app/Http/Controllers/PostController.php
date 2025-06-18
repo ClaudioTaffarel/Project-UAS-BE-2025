@@ -13,14 +13,6 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    /*
-    public function index()
-    {
-        $posts = Post::with('user')->latest()->get();
-        return view('posts.index', compact('posts'));
-    }
-    */
-    
     public function create()
     {
         return view('posts.create');
@@ -30,7 +22,7 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'caption' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $imagePath = $request->file('image')->store('uploads', 'public');
@@ -77,6 +69,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
+        // Yang bisa delete: pemilik post dan Admin (edbert19)
         if (auth()->id() !== $post->user_id && !auth()->user()->isAdmin()) {
             abort(403);
         }
@@ -88,13 +81,10 @@ class PostController extends Controller
         $post->delete();
 
         $redirect = $request->input('redirect_from') === 'recommendation'
-            ? route('recommendations.index') // Ganti sesuai route rekomendasi kamu
+            ? route('recommendations.index')
             : route('home');
 
         return redirect($redirect)->with('status', 'Post deleted successfully.');
     }
-
-
-
 }
 
