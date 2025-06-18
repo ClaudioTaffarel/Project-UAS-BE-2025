@@ -22,8 +22,12 @@ nilai UAS dari Mata Kuliah Back-End Programming angkatan 24/25
 
 1. Clone Repository ini
 2. cd kedalam folder cosmo terlebih dahulu
-3. Jalankan Apache dan MySQL dalam xampp control panel
-4. Jalankan php artisan serve pada terminal
+3. Jalankan "composer install"
+4. Copy .env-example menjadi .env, dan buat app Key dengan perintah "php artisan key:generate"
+5. Jalankah "php artisan migrate" dan "php artisan storage:link" untuk link database dan storage
+6. Jalankan Apache dan MySQL dalam xampp control panel
+7. Jalankan "php artisan serve" pada terminal
+8. Web sudah bisa di akses!
 
 " Apa saja fitur yang tersedia? "
 1. Autentikasi user, berupa metode login, register, dan forgot password
