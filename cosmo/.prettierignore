@@ -1,0 +1,6 @@
+public
+vendor
+storage
+*.log
+node_modules
+

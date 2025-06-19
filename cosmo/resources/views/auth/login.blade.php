@@ -1,88 +1,108 @@
 @extends('layouts.guest')
 
 @section('content')
-<link href="{{ asset('css/authh.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/authh.css') }}" rel="stylesheet" />
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card bg-dark text-white">
-                <div class="card-header bg-dark text-white text-center">Login</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card bg-dark text-white">
+                    <div class="card-header bg-dark text-white text-center">Login</div>
 
-                <div class="card-body">
-
-                    @if ($errors->any())
-                        <div class="alerttt">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if (session('success'))
-                        <div class="alertsucc">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end text-white">Email Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email"
-                                       type="email"
-                                       class="form-control bg-secondary text-white border-0"
-                                       name="email"
-                                       value="{{ old('email') }}"
-                                       required
-                                       autocomplete="email"
-                                       autofocus>
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alerttt">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end text-white">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password"
-                                       type="password"
-                                       class="form-control bg-secondary text-white border-0"
-                                       name="password"
-                                       required
-                                       autocomplete="current-password">
+                        @if (session('success'))
+                            <div class="alertsucc">
+                                {{ session('success') }}
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="row mb-0">
-                            <div class="center-actions">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-                                <a class="btn btn-link text-white" href="{{ route('manual.reset.form') }}">
-                                    Forgot Password?
-                                </a>
-                            </div>
-                        </div>
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
 
-                        <div class="row mt-3">
-                            <div class="col text-center">
-                                <div class="form-check d-inline-block">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                    <label class="form-check-label text-white" for="remember">
-                                        Remember Me
-                                    </label>
+                            <div class="row mb-3">
+                                <label
+                                    for="email"
+                                    class="col-md-4 col-form-label text-md-end text-white"
+                                >
+                                    Email Address
+                                </label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        class="form-control bg-secondary text-white border-0"
+                                        name="email"
+                                        value="{{ old('email') }}"
+                                        required
+                                        autocomplete="email"
+                                        autofocus
+                                    />
                                 </div>
                             </div>
-                        </div>
-                    </form>
+
+                            <div class="row mb-3">
+                                <label
+                                    for="password"
+                                    class="col-md-4 col-form-label text-md-end text-white"
+                                >
+                                    Password
+                                </label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        class="form-control bg-secondary text-white border-0"
+                                        name="password"
+                                        required
+                                        autocomplete="current-password"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="center-actions">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <a
+                                        class="btn btn-link text-white"
+                                        href="{{ route('manual.reset.form') }}"
+                                    >
+                                        Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col text-center">
+                                    <div class="form-check d-inline-block">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="remember"
+                                            id="remember"
+                                            {{ old('remember') ? 'checked' : '' }}
+                                        />
+                                        <label class="form-check-label text-white" for="remember">
+                                            Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
