@@ -22,7 +22,7 @@ nilai UAS dari Mata Kuliah Back-End Programming angkatan 24/25
 
 1. Clone Repository ini
 2. cd kedalam folder cosmo terlebih dahulu
-3. Jalankan "composer install"
+3. Jalankan "composer install" dan "npm install" pada terminal
 4. Copy .env-example menjadi .env, dan buat app Key dengan perintah "php artisan key:generate"
 5. Jalankah "php artisan migrate" dan "php artisan storage:link" untuk link database dan storage
 6. Jalankan Apache dan MySQL dalam xampp control panel
